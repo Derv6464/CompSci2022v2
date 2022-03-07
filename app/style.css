@@ -1,0 +1,177 @@
+/*  yellow - #FEEA00
+    white - #FFFFFF
+    black - #14110F
+    cyan - #03B5AA
+    navy - #233D4D
+*/
+
+body {
+    background-color: #03B5AA;
+    overflow-x: hidden;
+    margin:0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.nav {  
+    background-color: #FEEA00;
+    overflow: hidden;
+    padding: 20px;
+}
+
+#links{
+    display: none;
+}
+
+.burger{
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.bar1, .bar2, .bar3 { 
+    width: 33px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+.change .bar1{
+    -webkit-transform: rotate(-45deg) translate(-4px, 6px);
+    transform: rotate(-45deg) translate(-4px, 6px);
+}
+
+.change .bar2{
+    opacity: 0;
+}
+
+.change .bar3{
+    -webkit-transform: rotate(45deg) translate(-5px, -8px);
+    transform: rotate(45deg) translate(-5px, -8px);
+}
+
+.overlay {  
+    height: 100%;
+    width: 0;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    background-color: rgb(255, 255, 255); 
+    background-color: rgba(255, 255, 255, 0.9); 
+    overflow-x: hidden; 
+    transition: 0.5s; 
+
+}
+  
+.links {
+    position: relative;
+    top: 25%; 
+    width: 100%; 
+    text-align: center; 
+    margin-top: 30px; 
+}
+.overlay .burger{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  
+  cursor: pointer;
+  
+  /*opacity: 0; /* hide this */
+  z-index: 2;
+}
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block; 
+    transition: 0.3s; 
+}
+  
+
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
+
+.card1 {
+    color:#ffffff;
+    width: 100vw;
+    position: relative;
+    text-align: center;
+    padding:0%;
+}
+.centerText{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 255, 255, 0.5);
+    color: #233D4D;
+    padding: 5%;
+    font-size: 30px;
+    opacity: 50;
+}
+.card2{
+    background-color: #FFFFFF;
+    padding: 20px;
+    
+}
+
+.leftText{
+    width: 65%;
+}
+
+.rightText{
+    width:65%;
+    float: right;
+}
+.card2 img{
+    float:right;
+    padding-left: 67%;
+    position: absolute;
+}
+
+
+.card3{
+    background-color: #233D4D;
+    padding: 20px;
+    color: #ffffff;
+    
+}
+
+.card4{
+    padding: 20px;
+    color:#000000;
+}
+.button{
+    background-color: #03B5AA;
+    color: #000000;
+    border-radius: 5px;
+    border: none;
+    padding: 12px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.email{
+    background-color: #03B5AA;
+    width:30%;
+    border-radius: 5px;
+    
+    text-align: center;
+    padding:2%;
+}
+
+.phone{
+    background-color: #03B5AA;
+    width:30%;
+    border-radius: 5px;
+    
+    text-align: center;
+    padding:2%;
+}

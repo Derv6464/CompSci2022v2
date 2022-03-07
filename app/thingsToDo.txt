@@ -1,0 +1,12 @@
+- make sure folder id is bring sent to db
+- see if db isnt working cause wifi
+- code to make date selection work
+    - show filenames on option menu
+    - update var when selection is made
+- code to show the photo of the date selected
+    - show newest photo on start 
+- led code
+- button in place on motion sensor code
+- fix the photo that wont work
+- fix burger menu
+- check graph is good

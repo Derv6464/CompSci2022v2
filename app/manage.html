@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css"> 
+  <script src="client.js" defer></script>
+  <script src="https://cdn.plot.ly/plotly-1.2.0.min.js"></script>
+</head>
+<body>
+    <div class="nav">
+        <a href="manage.html" style="float:right" class='button'>Manage</a>
+        <div class="burger" onclick="hamToX(this)"> 
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="overlay" id="myNav">
+            <input type="checkbox" onclick="hamToX(this)"/>
+            <div class="bruger">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+            <div class="links">
+                <a href="index.html">Home</a>
+                <a href="product.html">Product</a>
+                <a href="about.html">About Us</a>
+                <a href="manage.html">Manage</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="card3">
+        Most recent photo
+        <div id="photo">
+            <select id='dateSelect'>
+                <option>Select a Date</option>
+            </select>
+            <br>
+
+            <iframe src="https://drive.google.com/file/d/1XLDzkF2v2ajzvX2K-CboUHXsjfg-xC-H/preview" width="640" height="480" allow="autoplay"></iframe>
+
+        </div>
+    </div>
+    <div class="card2">
+        when motion was detected
+      <div id="plotlyGraph" style="width: 90%"></div>
+   
+    </div>
+    <div class="card1">
+        other info
+    </div>
+</body>
+
+
+</html>
