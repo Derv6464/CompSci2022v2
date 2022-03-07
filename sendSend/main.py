@@ -1,20 +1,27 @@
 from datetime import datetime
-#from picamera import PiCamera
+from picamera import PiCamera
 from time import sleep
 import requests
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from Google import Create_Service
+import RPi.GPIO as GPIO
+import gpiozero
 
-#camera = PiCamera()
+camera = PiCamera()
 filename = "{0:%Y}-{0:%m}-{0:%d},{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
 date = "{0:%Y}-{0:%m}-{0:%d}".format(datetime.now())
 time = "{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
 baseUrl = ""
+GPIO.setwarnings(False)
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(10,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+led = gpiozero.LED(17)
 
-gauth = GoogleAuth()
-gauth.LocalWebserverAuth()
-drive = GoogleDrive(gauth)
+# gauth = GoogleAuth()
+# gauth.LocalWebserverAuth()
+# drive = GoogleDrive(gauth)
+
 
 def takePic(filename):
     camera.start_preview()
@@ -65,14 +72,19 @@ def getDriveID(filename):
     
 #sending file name/time to database
 # when motion detected:
-    #led.on()
+while True:
     filename = "{0:%Y}-{0:%m}-{0:%d},{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
     date = "{0:%Y}-{0:%m}-{0:%d}".format(datetime.now())
     time = "{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
-    #takePic(filename)
-    #dataToDrive(filename)
-   # idSend = getDriveID(filename)
-   # dataToGlitch(time,date,idSend)
-    #LED.off()
+    if GPIO.input(10) == GPIO.HIGH:
+        print("going")
+        sleep(0.2) 
+        led.on()
+        takePic(filename)
+        led.off()
+        dataToDrive(filename)
+        idSend = getDriveID(filename)
+        dataToGlitch(time,date,idSend)
+    
     
     
