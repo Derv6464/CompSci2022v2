@@ -1,27 +1,20 @@
 from datetime import datetime
-from picamera import PiCamera
+#from picamera import PiCamera
 from time import sleep
 import requests
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 from Google import Create_Service
-import RPi.GPIO as GPIO
-import gpiozero
 
-camera = PiCamera()
+#camera = PiCamera()
 filename = "{0:%Y}-{0:%m}-{0:%d},{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
 date = "{0:%Y}-{0:%m}-{0:%d}".format(datetime.now())
 time = "{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
 baseUrl = ""
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(10,GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-led = gpiozero.LED(17)
 
-# gauth = GoogleAuth()
-# gauth.LocalWebserverAuth()
-# drive = GoogleDrive(gauth)
-
+gauth = GoogleAuth()
+gauth.LocalWebserverAuth()
+drive = GoogleDrive(gauth)
 
 def takePic(filename):
     camera.start_preview()
@@ -29,15 +22,15 @@ def takePic(filename):
     camera.capture('/home/pi/Documents/compSci2022/CompSci2022-main/pictures/'+filename+'.jpg')
     camera.stop_preview()
     
-def dataToGlitch(time,date,driveID,idSend):
-    myobj = {'field':time,'value':date,'value':idSend}
+def dataToGlitch(time,date,idSend):
+    myobj = {'field':time,'value':date,'value2':idSend}
     print(time,date)
     baseurl = 'https://compsci2022.glitch.me/addData'
     x = requests.post(baseurl,data = myobj)
     print(x.text)
 
 def dataToDrive(filename):
-    upload_file = filename +".jpg"
+    upload_file = filename
     gfile = drive.CreateFile({'parents': [{'id': '1NCFFaZNpje1TVBFKee4ATiz0wLzLRJPD'}]})
     gfile.SetContentFile(upload_file)
     gfile.Upload()
@@ -61,7 +54,7 @@ def getDriveID(filename):
         response = service.files().list(q=query,pageToken=nextPageToken).execute()
         files.extend(response.get('files'))
         nextPageToken = response.get('nextPageToken')
-    
+    idSend = 0
     for i in files:
         if i['name'] == filename:
             print(i['name'])
@@ -72,19 +65,16 @@ def getDriveID(filename):
     
 #sending file name/time to database
 # when motion detected:
-while True:
-    filename = "{0:%Y}-{0:%m}-{0:%d},{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
+    #led.on()
+for i in range(1):
+    filename = "{0:%Y}-{0:%m}-{0:%d},{0:%H}.{0:%M}.{0:%S}".format(datetime.now()) +".jpg"
     date = "{0:%Y}-{0:%m}-{0:%d}".format(datetime.now())
     time = "{0:%H}.{0:%M}.{0:%S}".format(datetime.now())
-    if GPIO.input(10) == GPIO.HIGH:
-        print("going")
-        sleep(0.2) 
-        led.on()
-        takePic(filename)
-        led.off()
-        dataToDrive(filename)
-        idSend = getDriveID(filename)
-        dataToGlitch(time,date,idSend)
-    
+    filename = "1" +".jpg"
+    #takePic(filename)
+    dataToDrive(filename)
+    idSend = getDriveID(filename)
+    dataToGlitch(time,date,idSend)
+    #LED.off()
     
     
